@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_auth_practice/screens/otp-screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController phoneController = TextEditingController(text: "+92");
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -23,8 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "Login Screen",
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
         ),
+        bottom: PreferredSize(
+            child: Text("We will send you OTP on Number"),
+            preferredSize: Size.fromHeight(15)),
         backgroundColor: Colors.white10,
         centerTitle: true,
         elevation: 0.0,
@@ -104,16 +108,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void loginWithPhone() async {
     await auth.verifyPhoneNumber(
       phoneNumber: phoneController.text,
+      verificationFailed: (FirebaseAuthException e) {
+        if (e.code == 'invalid-phone-number') {
+          Fluttertoast.showToast(
+              msg: "Phone number is not Valid", gravity: ToastGravity.CENTER);
+        }
+      },
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
         // .then((value) {
         //  }
         // );
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        if (e.code == 'invalid-phone-number') {
-          print('The provided phone number is not valid.');
-        }
       },
       codeSent: (String verificationId, int? resendToken) {
         Navigator.push(

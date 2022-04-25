@@ -26,8 +26,11 @@ class _OtpScreenState extends State<OtpScreen> {
         title: Text(
           "Otp Screen",
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
         ),
+        bottom: PreferredSize(
+            child: Text("Enter the OTP here."),
+            preferredSize: Size.fromHeight(15)),
         backgroundColor: Colors.white10,
         centerTitle: true,
         elevation: 0.0,
@@ -92,7 +95,7 @@ class _OtpScreenState extends State<OtpScreen> {
             fontSize: 18.0);
       });
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(msg: e.message!, gravity: ToastGravity.BOTTOM);
+      Fluttertoast.showToast(msg: e.message!, gravity: ToastGravity.CENTER);
       return Future.value();
     }
   }
