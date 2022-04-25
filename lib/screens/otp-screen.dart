@@ -22,62 +22,60 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Otp Screen",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
+        appBar: AppBar(
+          title: Text(
+            "Otp Screen",
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+          bottom: PreferredSize(
+              child: Text("Enter the OTP here."),
+              preferredSize: Size.fromHeight(15)),
+          backgroundColor: Colors.white10,
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        bottom: PreferredSize(
-            child: Text("Enter the OTP here."),
-            preferredSize: Size.fromHeight(15)),
-        backgroundColor: Colors.white10,
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
+        body: SafeArea(
           top: true,
-          child: Expanded(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                    // padding: EdgeInsets.symmetric(vertical: 6, horizontal: 35),
-                    child: OTPTextField(
-                        controller: otpController,
-                        length: 6,
-                        width: MediaQuery.of(context).size.width * 1,
-                        textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                        fieldWidth: 42,
-                        otpFieldStyle: OtpFieldStyle(
-                            focusBorderColor: Colors.grey,
-                            enabledBorderColor: Colors.grey),
-                        fieldStyle: FieldStyle.box,
-                        outlineBorderRadius: 12,
-                        obscureText: true,
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                        onChanged: (pin) {
-                          print("Changed: " + pin);
-                        },
-                        onCompleted: (pin) {
-                          verifyOTP(widget.verificationId, pin);
-                        }),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                  // padding: EdgeInsets.symmetric(vertical: 6, horizontal: 35),
+                  child: OTPTextField(
+                      controller: otpController,
+                      length: 6,
+                      width: MediaQuery.of(context).size.width * 1,
+                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                      fieldWidth: 42,
+                      otpFieldStyle: OtpFieldStyle(
+                          focusBorderColor: Colors.grey,
+                          enabledBorderColor: Colors.grey),
+                      fieldStyle: FieldStyle.box,
+                      outlineBorderRadius: 12,
+                      obscureText: true,
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                      onChanged: (pin) {
+                        print("Changed: " + pin);
+                      },
+                      onCompleted: (pin) {
+                        verifyOTP(widget.verificationId, pin);
+                      }),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.only(bottom: 40, top: 5, left: 38, right: 38),
+                  child: Text(
+                    "Didn't received a code? Wait for 57 sec",
+                    textAlign: TextAlign.left,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        bottom: 40, top: 5, left: 38, right: 38),
-                    child: Text(
-                      "Didn't received a code? Wait for 57 sec",
-                      textAlign: TextAlign.left,
-                    ),
-                  )
-                ]),
-          )),
-    );
+                )
+              ]),
+        ));
   }
 
   void verifyOTP(verificationId, pin) async {

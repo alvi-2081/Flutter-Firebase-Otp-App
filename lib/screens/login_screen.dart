@@ -34,74 +34,63 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0.0,
       ),
       body: SafeArea(
-          top: true,
-          child: Expanded(
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 35),
-                child: TextFormField(
-                  controller: phoneController,
-                  cursorColor: Colors.grey,
-                  decoration: InputDecoration(
-                    hintText: "Enter Email or Number",
-                    labelText: 'Email/Number',
-                    labelStyle: TextStyle(color: Colors.grey),
-                    // prefixIcon: Icon(
-                    //   Icons.email,
-                    //   color: Colors.indigo[600],
-                    // ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(14)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(14)),
-                  ),
-                  // validator: MultiValidator([
-                  //   RequiredValidator(errorText: "Required *"),
-                  //   EmailValidator(errorText: "Not A Valid Email"),
-                  // ]
-                ),
+        top: true,
+        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 35),
+            child: TextFormField(
+              controller: phoneController,
+              cursorColor: Colors.grey,
+              decoration: InputDecoration(
+                hintText: "Enter Email or Number",
+                labelText: 'Email/Number',
+                labelStyle: TextStyle(color: Colors.grey),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(14)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: new BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(14)),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                // height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    loginWithPhone();
-                  },
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 110)),
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide(
-                                color: Color.fromRGBO(179, 245, 66, 1)))),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromRGBO(179, 245, 66, 1)),
-                  ),
-                ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            child: ElevatedButton(
+              onPressed: () {
+                loginWithPhone();
+              },
+              child: Text(
+                'Continue',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
-              Container(
-                padding:
-                    EdgeInsets.only(bottom: 20, top: 5, left: 38, right: 38),
-                child: Text(
-                  "By Signing up Yo are agreeing to the Company's Privacy Policies and Terms of Use. And allow us to use your information for future Marketing",
-                  textAlign: TextAlign.justify,
-                ),
-              )
-            ]),
-          )),
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                    EdgeInsets.symmetric(vertical: 15, horizontal: 110)),
+                elevation: MaterialStateProperty.all(0),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(
+                            color: Color.fromRGBO(179, 245, 66, 1)))),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromRGBO(179, 245, 66, 1)),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: 20, top: 5, left: 38, right: 38),
+            child: Text(
+              "By Signing up Yo are agreeing to the Company's Privacy Policies and Terms of Use. And allow us to use your information for future Marketing",
+              textAlign: TextAlign.justify,
+            ),
+          )
+        ]),
+      ),
     );
   }
 
@@ -116,9 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
-        // .then((value) {
-        //  }
-        // );
       },
       codeSent: (String verificationId, int? resendToken) {
         Navigator.push(
